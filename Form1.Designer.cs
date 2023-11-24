@@ -37,10 +37,11 @@
             // 
             // scorelable
             // 
+            this.scorelable.AutoSize = true;
             this.scorelable.ForeColor = System.Drawing.Color.LawnGreen;
-            this.scorelable.Location = new System.Drawing.Point(338, 17);
+            this.scorelable.Location = new System.Drawing.Point(388, 23);
             this.scorelable.Name = "scorelable";
-            this.scorelable.Size = new System.Drawing.Size(100, 23);
+            this.scorelable.Size = new System.Drawing.Size(14, 16);
             this.scorelable.TabIndex = 0;
             this.scorelable.Text = "0";
             this.scorelable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -69,6 +70,7 @@
             this.Controls.Add(this.loselable);
             this.Controls.Add(this.scorelable);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Squarechaser";
             this.Text = "Square Chaser";
@@ -76,6 +78,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
