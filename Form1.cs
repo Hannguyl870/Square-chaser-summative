@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,8 @@ namespace Square_chaser_summative
         int playerScore = 0;
         int playerSpeed = 4;
 
-        
+        int counter = 0;
+       
 
         bool wDown = false;
         bool sDown = false;
@@ -37,14 +39,17 @@ namespace Square_chaser_summative
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush greenyBrush = new SolidBrush(Color.GreenYellow);
 
-        Random randRsquares = new Random();
-        Random randGsquares = new Random();
+        Random randGen = new Random();
+        Stopwatch mywatch = new Stopwatch();
+
 
 
         public Squarechaser()
         {
             InitializeComponent();
             loselable.Visible = false;
+
+
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -117,7 +122,6 @@ namespace Square_chaser_summative
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-          
             //move player 
             if (wDown == true && player.Y > 0)
             {
@@ -157,16 +161,50 @@ namespace Square_chaser_summative
             {
                 player.X += playerSpeed;
             }
+
+            //check if player has intersected with anything 
+            if (player.IntersectsWith(greensquare))
+            {
+                playerScore++;
+                scorelable.Text = $"{playerScore}";
+
+                greensquare.X = randGen.Next(10, 580);
+                greensquare.Y = randGen.Next(10, 340);
+
+            }
+            if (player.IntersectsWith(redsquare))
+            {
+                playerScore--;
+                scorelable.Text = $"{playerScore}";
+
+                redsquare.X = randGen.Next(10, 580);
+                redsquare.Y = randGen.Next(10, 340);
+
+            }
+            //genertate random red squares every 100
+            //if ( % 100 == 0)
+            //{
+
+            //}
+
+            //win or lose
             if (playerScore < 0)
             {
                 gamertimer.Enabled = false;
                 loselable.Visible = true;
-                loselable.Text = "You lose";
-
+                loselable.Text = "You Lose";
+            }
+            if (playerScore == 10)
+            {
+                gamertimer.Enabled = false;
+                loselable.Visible = true;
+                loselable.Text = "You  Win!!";
             }
 
             Refresh();  
 
         }
+
+       
     }
 }
