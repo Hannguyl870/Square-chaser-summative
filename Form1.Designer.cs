@@ -38,6 +38,7 @@
             // scorelable
             // 
             this.scorelable.AutoSize = true;
+            this.scorelable.BackColor = System.Drawing.Color.Transparent;
             this.scorelable.ForeColor = System.Drawing.Color.LawnGreen;
             this.scorelable.Location = new System.Drawing.Point(388, 23);
             this.scorelable.Name = "scorelable";

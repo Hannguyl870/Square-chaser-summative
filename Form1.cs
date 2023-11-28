@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 using System.Windows.Forms;
 
 namespace Square_chaser_summative
@@ -19,8 +20,8 @@ namespace Square_chaser_summative
         int playerScore = 0;
         int playerSpeed = 4;
 
-        int counter = 0;
-       
+        SoundPlayer sp;
+
 
         bool wDown = false;
         bool sDown = false;
@@ -32,8 +33,19 @@ namespace Square_chaser_summative
         bool rightarrowDown = false;
 
         Rectangle player = new Rectangle(280, 200, 30, 30);
-        Rectangle redsquare = new Rectangle(110, 195, 15, 15);
-        Rectangle greensquare = new Rectangle(200, 110, 10, 10);
+
+        Rectangle red1 = new Rectangle(110, 195, 15, 15);
+        Rectangle red2 = new Rectangle(-15,-15,15,15);
+        Rectangle red3 = new Rectangle(-15, -15, 15,15);
+        Rectangle red4 = new Rectangle(-15, -15, 15, 15);
+        Rectangle red5 = new Rectangle(-15, -15, 15, 15);
+
+        Rectangle green1 = new Rectangle(200, 110, 10, 10);
+        Rectangle green2 = new Rectangle(-10, -10, 10, 10);
+        Rectangle green3 = new Rectangle(-10, -10, 10, 10);
+        Rectangle green4 = new Rectangle(-10, -10, 10, 10);
+        Rectangle green5 = new Rectangle(-10, -10, 10, 10);
+
 
         SolidBrush lightblueBrush = new SolidBrush(Color.LightBlue);
         SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -51,6 +63,24 @@ namespace Square_chaser_summative
 
 
         }
+        private void Squarechaser_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.FillRectangle(lightblueBrush, player);
+
+            e.Graphics.FillRectangle(redBrush, red1);
+            e.Graphics.FillRectangle(redBrush, red2);
+            e.Graphics.FillRectangle(redBrush, red3);
+            e.Graphics.FillRectangle(redBrush, red4);
+            e.Graphics.FillRectangle(redBrush, red5);
+
+            e.Graphics.FillRectangle(greenyBrush, green1);
+            e.Graphics.FillRectangle(greenyBrush, green2);
+            e.Graphics.FillRectangle(greenyBrush, green3);
+            e.Graphics.FillRectangle(greenyBrush, green4);
+            e.Graphics.FillRectangle(greenyBrush, green5);
+
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -113,13 +143,7 @@ namespace Square_chaser_summative
             }
         }
 
-        private void Squarechaser_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.FillRectangle(lightblueBrush, player);
-            e.Graphics.FillRectangle(redBrush, redsquare);
-            e.Graphics.FillRectangle(greenyBrush, greensquare);
-        }
-
+       
         private void timer1_Tick(object sender, EventArgs e)
         {
             //move player 
@@ -162,49 +186,207 @@ namespace Square_chaser_summative
                 player.X += playerSpeed;
             }
 
-            //check if player has intersected with anything 
-            if (player.IntersectsWith(greensquare))
+            //check if player has intersected with green squares
+            if (player.IntersectsWith(green1))
             {
                 playerScore++;
                 scorelable.Text = $"{playerScore}";
 
-                greensquare.X = randGen.Next(10, 580);
-                greensquare.Y = randGen.Next(10, 340);
+                green1.X = randGen.Next(10, 580);
+                green1.Y = randGen.Next(10, 340);
+
+                NewGreen();
+                NewRed();
+
+                sp = new SoundPlayer(Properties.Resources.coins_1);
+                sp.Play();
 
             }
-            if (player.IntersectsWith(redsquare))
+            if (player.IntersectsWith(green2))
+            {
+                playerScore++;
+                scorelable.Text = $"{playerScore}";
+
+                green2.X = randGen.Next(10, 580);
+                green2.Y = randGen.Next(10, 340);
+
+                NewGreen();
+                NewRed();
+
+                sp = new SoundPlayer(Properties.Resources.coins_1);
+                sp.Play();
+            }
+            if (player.IntersectsWith(green3))
+            {
+                playerScore++;
+                scorelable.Text = $"{playerScore}";
+
+                green3.X = randGen.Next(10, 580);
+                green3.Y = randGen.Next(10, 340);
+
+                NewGreen();
+                NewRed();
+
+                sp = new SoundPlayer(Properties.Resources.coins_1);
+                sp.Play();
+            }
+            if (player.IntersectsWith(green4))
+            {
+                playerScore++;
+                scorelable.Text = $"{playerScore}";
+
+                green4.X = randGen.Next(10, 580);
+                green4.Y = randGen.Next(10, 340);
+
+                NewGreen();
+                NewRed();
+
+                sp = new SoundPlayer(Properties.Resources.coins_1);
+                sp.Play();
+            }
+            if (player.IntersectsWith(green5))
+            {
+                playerScore++;
+                scorelable.Text = $"{playerScore}";
+
+                green5.X = randGen.Next(10, 580);
+                green5.Y = randGen.Next(10, 340);
+
+                NewGreen();
+                NewRed();
+
+                sp = new SoundPlayer(Properties.Resources.coins_1);
+                sp.Play();
+            }
+            //check intersection with red squares 
+            if (player.IntersectsWith(red1))
             {
                 playerScore--;
                 scorelable.Text = $"{playerScore}";
 
-                redsquare.X = randGen.Next(10, 580);
-                redsquare.Y = randGen.Next(10, 340);
+                red1.X = randGen.Next(10, 580);
+                red1.Y = randGen.Next(10, 340);
+
+                NewRed();
+                NewGreen();
 
             }
-            //genertate random red squares every 100
-            //if ( % 100 == 0)
-            //{
+            if (player.IntersectsWith(red2))
+            {
+                playerScore--;
+                scorelable.Text = $"{playerScore}";
 
-            //}
+                red2.X = randGen.Next(10, 580);
+                red2.Y = randGen.Next(10, 340);
 
+                NewRed();
+                NewGreen();
+            }
+            if (player.IntersectsWith(red3))
+            {
+                playerScore--;
+                scorelable.Text = $"{playerScore}";
+
+                red3.X = randGen.Next(10, 580);
+                red3.Y = randGen.Next(10, 340);
+
+                NewRed();
+                NewGreen();
+
+                
+            }
+            if (player.IntersectsWith(red4))
+            {
+                playerScore--;
+                scorelable.Text = $"{playerScore}";
+
+                red4.X = randGen.Next(10, 580);
+                red4.Y = randGen.Next(10, 340);
+
+                NewRed();
+                NewGreen();
+            }
+            if (player.IntersectsWith(red5))
+            {
+                playerScore--;
+                scorelable.Text = $"{playerScore}";
+
+                red5.X = randGen.Next(10, 580);
+                red5.Y = randGen.Next(10, 340);
+
+                NewRed();
+                NewGreen();
+            }
+            
             //win or lose
             if (playerScore < 0)
             {
                 gamertimer.Enabled = false;
                 loselable.Visible = true;
+                loselable.ForeColor = Color.Red;
                 loselable.Text = "You Lose";
+                sp = new SoundPlayer(Properties.Resources.power_down);
+                sp.Play();
             }
-            if (playerScore == 10)
+            if (playerScore == 15)
             {
                 gamertimer.Enabled = false;
                 loselable.Visible = true;
+                loselable.ForeColor = Color.Green;
                 loselable.Text = "You  Win!!";
             }
 
-            Refresh();  
+            Refresh();
 
         }
+        //pop up green squares
+        private void NewGreen()
+        {
+            if (playerScore == 2)
+            {
+                green2.X = randGen.Next(10, 580);
+                green2.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 6)
+            {
+                green3.X = randGen.Next(10, 580);
+                green3.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 10)
+            {
+                green4.X = randGen.Next(10, 580);
+                green4.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 12)
+            {
+                green5.X = randGen.Next(10, 580);
+                green5.Y = randGen.Next(10, 340);
+            }
+        }
 
-       
+        //pop up red squares 
+        private void NewRed()
+        {
+            if (playerScore == 3)
+            {
+                red2.X = randGen.Next(10, 580);
+                red2.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 6)
+            {
+                red3.X = randGen.Next(10, 580);
+                red3.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 9)
+            {
+                red4.X = randGen.Next(10, 580);
+                red4.Y = randGen.Next(10, 340);
+            }
+            if (playerScore == 12)
+            {
+                red5.X = randGen.Next(10, 580);
+                red5.Y = randGen.Next(10, 340);
+            }
+        }
     }
 }
